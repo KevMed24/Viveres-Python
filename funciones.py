@@ -42,26 +42,26 @@ def imprimir_producto_por_indice(nombre_abuscar, nombresproduc, precio, index):
     else:
         print(f"No existe el producto {nombre_abuscar} en el registro")
 
-def editar_producto(nombre_abuscar, nombresproduc, precio, n):
+def editar_producto(nombre_abuscar, cantidad, fecha, precio_producto, nombresproduc, precio, n):
     for i in range(n):
         if nombresproduc[i][0] == nombre_abuscar:
-            print(f"Producto: {nombresproduc[i][0]}")
-            nombresproduc[i][1] = input("Ingrese la nueva cantidad del producto: ").strip()
-            nombresproduc[i][2] = input("Ingrese la nueva fecha de caducidad del producto (YYYY-MM-DD): ").strip()
-            precio[i] = float(input("Ingrese el nuevo precio del producto: ").strip())
-            break
+            nombresproduc[i][1] = cantidad
+            nombresproduc[i][2] = fecha
+            precio[i] = precio_producto
+            return True
+    return False
 
-def agregar_producto(nombresproduc, precio, n):
+def agregar_producto(nombre, cantidad, fecha, precio_producto, nombresproduc, precio, n):
     if n[0] >= 10:
         print("No se pueden agregar más productos, el inventario está lleno.")
         return
-    nombresproduc[n[0]][0] = input("Ingrese el nombre del nuevo producto: ").strip()
-    nombresproduc[n[0]][1] = input("Ingrese la cantidad del nuevo producto: ").strip()
-    nombresproduc[n[0]][2] = input("Ingrese la fecha de caducidad del nuevo producto (YYYY-MM-DD): ").strip()
-    precio[n[0]] = float(input("Ingrese el precio del nuevo producto: ").strip())
+    nombresproduc[n[0]][0] = nombre
+    nombresproduc[n[0]][1] = cantidad
+    nombresproduc[n[0]][2] = fecha
+    precio[n[0]] = precio_producto
     n[0] += 1
 
-def eliminar_producto(nombresproduc, precio, n, nombre_abuscar):
+def eliminar_producto(nombre_abuscar, nombresproduc, precio, n):
     index = buscar_producto_por_nombre(nombresproduc, nombre_abuscar, n[0])
     if index != -1:
         for i in range(index, n[0] - 1):
